@@ -1,0 +1,16 @@
+﻿@*@model CategoryDetailsViewModel*@
+@model CategorySummary
+
+<h4>Spending summary</h4>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <p class="text-dark">Spent this month: @Model.ThisMonthSpentAmount</p>
+            <p class="text-dark">Items bought this month: @Model.ThisMonthBoughtCount</p>
+        </div>
+        <div class="col">
+            <p class="text-dark">Spent total: @Model.TotalSpentAmount</p>
+            <p class="text-dark">Items bought: @Model.TotalBoughtCount</p>
+        </div>
+    </div>
+</div>

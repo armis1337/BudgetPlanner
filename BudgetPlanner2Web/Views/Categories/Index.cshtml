@@ -1,0 +1,58 @@
+﻿@model IEnumerable<CategorySummary> 
+
+@{
+    ViewData["Title"] = "My categories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>My categories</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortBy="@ViewBag.NameOrder">@Html.DisplayNameFor(model => model.Category.Name)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category.Description)
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortBy="@ViewBag.BudgetOrder">@Html.DisplayNameFor(model => model.Category.Budget)</a>
+                @*@Html.DisplayNameFor(model => model.Category.Budget)*@
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Description)
+            </td>
+            <td>
+                @if (item.Warning)
+                {
+                    <div class="text-danger">
+                        @Html.DisplayFor(modelItem => item.BudgetStatus)
+                    </div>
+                }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.BudgetStatus)
+                }
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Category.CategoryId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Category.CategoryId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Category.CategoryId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

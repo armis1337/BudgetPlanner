@@ -1,0 +1,45 @@
+﻿@model IEnumerable<CategorySummary>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="text-center">
+    <h1 class="display-4">
+        Welcome!
+        <br /><small class="text-muted" style="font-size:60%">Your stats</small>
+    </h1>
+   @* <input type="button" value="Export to Google Drive" onclick="location.href='@Url.Action("Test", "Home")'">*@
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h5>This month</h5>
+                @foreach (var cat in Model)
+                {
+                    <p>Category: <b>@cat.Category.Name</b></p>
+                    <p>Items bought: <b>@cat.ThisMonthBoughtCount</b></p>
+                    <p>Money spent: <b>@cat.ThisMonthSpentAmount</b></p>
+                    @if (cat.Warning)
+                    {
+                        <p>Budget: <b class="text-danger">@cat.BudgetStatus</b></p>
+                    }
+                    else
+                    {
+                        <p>Budget: <b>@cat.BudgetStatus</b></p>
+                    }
+                    <hr />
+                }
+            </div>
+            <div class="col">
+                <h5>Total</h5>
+                @foreach (var cat in Model)
+                {
+                    <p>Category: <b>@cat.Category.Name</b></p>
+                    <p>Items bought: <b>@cat.TotalBoughtCount</b></p>
+                    <p>Money spent: <b>@cat.TotalSpentAmount</b></p>
+                    <hr />
+                }
+            </div>
+        </div>
+    </div>
+</div>
