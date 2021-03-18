@@ -6,10 +6,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BudgetPlanner2Web.Models
 {
-    public class Category
+    public class Category : BaseEntity
     {
-        public int CategoryId { get; set; }
-
         [Required]
         public string Name { get; set; }
         public string Description { get; set; }
@@ -20,11 +18,11 @@ namespace BudgetPlanner2Web.Models
         [Range(1, double.MaxValue, ErrorMessage = "Budget must be greater than 0.")]
         public decimal? Budget { get; set; }
 
-        public void Update(Category cat)
-        {
-            Name = cat.Name;
-            Description = cat.Description;
-            Budget = cat.Budget;
-        }
+        //public void Update(Category cat)
+        //{
+        //    Name = cat.Name;
+        //    Description = cat.Description;
+        //    Budget = cat.Budget;
+        //}
     }
 }

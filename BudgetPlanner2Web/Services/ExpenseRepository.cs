@@ -1,87 +1,119 @@
-﻿using BudgetPlanner2Web.Data;
-using BudgetPlanner2Web.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
+using BudgetPlanner2Web.Data;
+using BudgetPlanner2Web.GenericRepository;
+using BudgetPlanner2Web.Models;
+using BudgetPlanner2Web.ViewModels;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace BudgetPlanner2Web.Services
 {
-    public class ExpenseRepository : IExpenseRepository
+    public class ExpenseRepository : GenericRepository<Expense>, IExpenseRepository
     {
-        private readonly AppDbContext _context;
-        private readonly HttpContext _httpContext;
-        private readonly UserManager<ApplicationUser> _userManager;
-        public ExpenseRepository(AppDbContext context, IHttpContextAccessor contextAccessor, UserManager<ApplicationUser> mngr)
+        private readonly IGenericRepository<Category> _categoryRepository;
+
+        public ExpenseRepository(AppDbContext context, IHttpContextAccessor http, IGenericRepository<Category> catRepo) : base(context, http)
         {
-            _context = context;
-            _httpContext = contextAccessor.HttpContext;
-            _userManager = mngr;
+            _categoryRepository = catRepo;
         }
 
-        public IEnumerable<Expense> AllExpenses
+        public override async Task<bool> Update(Expense obj)
         {
-            get
+            var myCategories = await _categoryRepository.GetAll();
+
+            if (myCategories.Any(x => x.Id == obj.CategoryId))
             {
-                return _context.Expenses
-                    .Include(x => x.Category)
-                    .Include(x => x.ApplicationUser)
-                    .Where(x => x.ApplicationUser.Id == GetCurrentUserId())
-                    .OrderByDescending(x => x.Date)
-                    .ToList();
+                return await base.Update(obj);
             }
+            return false;
         }
 
-        public async Task<Expense> GetExpenseById(int id)
+        public override bool Add(Expense obj)
         {
-            return await _context.Expenses
-                .Where(x => x.ExpenseId == id)
-                .Include(x => x.Category)
-                .Include(x => x.ApplicationUser)
-                .FirstOrDefaultAsync(x => x.ApplicationUser.Id == GetCurrentUserId());
-        }
-
-        public async Task<Expense> AddExpense(Expense expense)
-        {
-            expense.ApplicationUser = await _userManager.GetUserAsync(_httpContext.User);
-            _context.Expenses.Add(expense);
-            await _context.SaveChangesAsync();
-            return expense;
-        }
-         
-        public async Task<Expense> UpdateExpense(Expense expense)
-        {
-            var tmpExpense = await GetExpenseById(expense.ExpenseId);
-            if(tmpExpense.ApplicationUser.Id == GetCurrentUserId())
+            var myCategories = _categoryRepository.GetAll().Result;
+            if (myCategories.Any(x => x.Id == obj.CategoryId))
             {
-                tmpExpense.Update(expense);
-                _context.Update(tmpExpense);
-                await _context.SaveChangesAsync();
-                return tmpExpense;
+                return base.Add(obj);
+            }
+            return false;
+        }
+
+        public async Task<IEnumerable<Expense>> GetByCategoryId(int id)
+        {
+            return await table
+                .Where(x => x.ApplicationUserId == GetCurrentUserId())
+                .Where(x => x.CategoryId == id)
+                .ToListAsync();
+        }
+
+        public async Task<ExpensesListViewModel> GetAll(int? catId, string sortBy, int? page)
+        {
+
+            var viewModel = new ExpensesListViewModel();
+            var categories = await _categoryRepository.GetAll();
+            categories = categories.Prepend(new Category { Id = 0, Name = "All categories" });
+
+            IQueryable<Expense> list = table
+                .Where(x => x.ApplicationUserId == GetCurrentUserId());
+
+            if (catId != null && catId != 0)
+            {
+                //list = await GetByCategoryId(catId.Value); // old
+                list = list
+                    .Where(x => x.CategoryId == catId.Value);
+
+                viewModel.CurrentCategory = await _categoryRepository.GetById(catId.Value);
             }
             else
-                return null;
-        }
-
-        public async Task DeleteExpense(int id)
-        {
-            var expense = await GetExpenseById(id);
-            if (expense.ApplicationUser.Id == GetCurrentUserId())
             {
-                _context.Remove(expense);
-                await _context.SaveChangesAsync();
+                //list = await GetAll(); // old
+                viewModel.CurrentCategory = categories.ElementAt(0);
             }
-        }
 
-        private string GetCurrentUserId()
-        {
-            var claimsIdentity = (ClaimsIdentity)_httpContext.User.Identity;
-            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-            return claim.Value;
+            viewModel.CategoriesSelectList = new SelectList(categories, "Id", "Name", viewModel.CurrentCategory.Id);
+
+            viewModel.SortOrder = new Dictionary<string, string>() { 
+                { "category", "categorydesc" }, { "amount", "amountdesc" }, { "date", "datedesc" } 
+            };
+
+            viewModel.CurrentSort = sortBy;
+            switch (sortBy)
+            {
+                case "categorydesc":
+                    list = list.OrderByDescending(x => x.Category.Name);
+                    viewModel.SortOrder["category"] = "categoryasc";
+                    break;
+                case "categoryasc":
+                    list = list.OrderBy(x => x.Category.Name);
+                    viewModel.SortOrder["category"] = "categorydesc";
+                    break;
+                case "amountdesc":
+                    list = list.OrderByDescending(x => x.Amount);
+                    viewModel.SortOrder["amount"] = "amountasc";
+                    break;
+                case "amountasc":
+                    list = list.OrderBy(x => x.Amount);
+                    viewModel.SortOrder["amount"] = "amountdesc";
+                    break;
+                case "datedesc":
+                    list = list.OrderByDescending(x => x.Date);
+                    viewModel.SortOrder["date"] = "dateasc";
+                    break;
+                case "dateasc":
+                    list = list.OrderBy(x => x.Date);
+                    viewModel.SortOrder["date"] = "datedesc";
+                    break;
+                default:
+                    viewModel.CurrentSort = "";
+                    break;
+            }
+
+            viewModel.Items = await PaginatedList<Expense>.Create(list, page ?? 1);
+            return viewModel;
         }
     }
 }

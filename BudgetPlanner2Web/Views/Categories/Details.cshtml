@@ -30,12 +30,24 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Category.Budget)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Category.CreatedAt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Category.CreatedAt)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Category.UpdatedAt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Category.UpdatedAt)
+        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Category.CategoryId">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Category.Id">Edit</a> |
     <a asp-action="Index">Back to List</a> |
-    <a asp-controller="Expenses" asp-action="Index" asp-route-id="@Model.Category.Name">View all expenses in this category</a>
+    <a asp-controller="Expenses" asp-action="Index" asp-route-id="@Model.Category.Id">View all expenses in this category</a>
 </div>
 <hr />
 <partial name="_CategorySummary" model="@Model" />

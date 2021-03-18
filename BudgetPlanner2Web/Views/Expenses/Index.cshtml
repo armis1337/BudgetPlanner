@@ -1,21 +1,16 @@
-﻿
-
-
-
-@model ExpensesListViewModel
+﻿@model ExpensesListViewModel
 
 @{
     ViewData["Title"] = "Index";
 }
 
-@if (Model.CurrentCategory == null)
+@if (Model.CurrentCategory.Id == 0)
 {
     <h1>All expenses</h1>
-    @*@(Model.CurrentCategory = new Category { CategoryId = 0 })*@
 }
 else
 {
-<h1>@Model.CurrentCategory.Name expenses</h1>
+    <h1>@Model.CurrentCategory.Name expenses</h1>
 }
 
 <p>
@@ -40,54 +35,67 @@ else
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(x => Model.Expenses.FirstOrDefault().ExpenseId)
+                @Html.DisplayNameFor(x => Model.Items.FirstOrDefault().Id)
             </th>
             <th>
-                <a asp-action="Index" asp-route-id="@Model.CurrentCategory.CategoryId" asp-route-sortBy="@ViewBag.CategoryOrder">@Html.DisplayNameFor(x => Model.Expenses.First().Category)</a>
-                @*@Html.DisplayNameFor(x => Model.Expenses.First().Category)*@
+                <a asp-action="Index" asp-route-id="@Model.CurrentCategory.Id" asp-route-sortBy="@Model.SortOrder["category"]">@Html.DisplayNameFor(x => Model.Items.First().Category)</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-id="@Model.CurrentCategory.CategoryId" asp-route-sortBy="@ViewBag.AmountOrder">@Html.DisplayNameFor(x => Model.Expenses.First().Amount)</a>
-                @*@Html.DisplayNameFor(x => Model.Expenses.First().Amount)*@
+                <a asp-action="Index" asp-route-id="@Model.CurrentCategory.Id" asp-route-sortBy="@Model.SortOrder["amount"]">@Html.DisplayNameFor(x => Model.Items.First().Amount)</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-id="@Model.CurrentCategory.CategoryId" asp-route-sortBy="@ViewBag.DateOrder">@Html.DisplayNameFor(x => Model.Expenses.First().Date)</a>
-                @*@Html.DisplayNameFor(x => Model.Expenses.First().Date)*@
+                <a asp-action="Index" asp-route-id="@Model.CurrentCategory.Id" asp-route-sortBy="@Model.SortOrder["date"]">@Html.DisplayNameFor(x => Model.Items.First().Date)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(x => Model.Expenses.First().Comment)
+                @Html.DisplayNameFor(x => Model.Items.First().Comment)
             </th>
             <th></th>
         </tr>
     </thead>
-    @{int i = 1;}
-    @foreach (var ex in Model.Expenses)
+    @foreach (var ex in Model.Items)
     {
         <tr>
             <td>
-                @*@Html.DisplayFor(x => ex.ExpenseId)*@
-                @(i++)
+                @Html.DisplayFor(x => ex.Id)
             </td>
             <td>
                 @Html.DisplayFor(x => ex.Category.Name)
-                @*<a asp-action="Index" asp-route-sortBy="@ViewBag.CategoryOrder">@Html.DisplayFor(x => ex.Category.Name)</a>*@
             </td>
             <td>
                 @Html.DisplayFor(x => ex.Amount)
-                @*<a asp-action="Index" asp-route-sortBy="@ViewBag.AmountOrder">@Html.DisplayFor(x => ex.Amount)</a>*@
             </td>
             <td>
                 @Html.DisplayFor(x => ex.Date)
-                @*<a asp-action="Index" asp-route-sortBy="@ViewBag.DateOrder">@Html.DisplayFor(x => ex.Date)</a>*@
             </td>
             <td>
                 @Html.DisplayFor(x => ex.Comment)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@ex.ExpenseId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@ex.ExpenseId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@ex.ExpenseId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@ex.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@ex.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@ex.Id">Delete</a>
             </td>
         </tr>
     }
 </table>
+
+@{
+    var prevDisabled = !Model.Items.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Items.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+    asp-route-id="@Model.CurrentCategory.Id"
+    asp-route-sortBy="@Model.CurrentSort"
+    asp-route-page="@(Model.Items.PageIndex - 1)"
+    class="btn btn-dark @prevDisabled">
+    Previous
+</a>
+
+<a asp-action="Index"
+    asp-route-id="@Model.CurrentCategory.Id"
+    asp-route-sortBy="@Model.CurrentSort"
+    asp-route-page="@(Model.Items.PageIndex + 1)"
+    class="btn btn-dark @nextDisabled">
+    Next
+</a>

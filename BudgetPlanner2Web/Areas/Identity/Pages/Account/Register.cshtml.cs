@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using BudgetPlanner2Web.Services;
+using BudgetPlanner2Web.GenericRepository;
 
 namespace BudgetPlanner2Web.Areas.Identity.Pages.Account
 {
@@ -25,14 +26,14 @@ namespace BudgetPlanner2Web.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly IGenericRepository<Category> _categoryRepository;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            ICategoryRepository catRepo)
+            IGenericRepository<Category> catRepo)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -86,7 +87,8 @@ namespace BudgetPlanner2Web.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
 
                     // kai vartojas uzsiregistruoja, sukuriam jam Default kategorija
-                    await _categoryRepository.AddDefaultCategory(user);
+                    //await _categoryRepository.AddDefaultCategory(user);
+                    _categoryRepository.Add(new Category { Name = "Default", Description = "Default category" });
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

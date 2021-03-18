@@ -4,14 +4,16 @@ using BudgetPlanner2Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BudgetPlanner2Web.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210316145351_SeedExpenses")]
+    partial class SeedExpenses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,7 +88,7 @@ namespace BudgetPlanner2Web.Migrations
 
             modelBuilder.Entity("BudgetPlanner2Web.Models.Category", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -97,9 +99,6 @@ namespace BudgetPlanner2Web.Migrations
                     b.Property<decimal?>("Budget")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -107,10 +106,7 @@ namespace BudgetPlanner2Web.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
+                    b.HasKey("CategoryId");
 
                     b.HasIndex("ApplicationUserId");
 
@@ -119,7 +115,7 @@ namespace BudgetPlanner2Web.Migrations
 
             modelBuilder.Entity("BudgetPlanner2Web.Models.Expense", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ExpenseId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -136,16 +132,10 @@ namespace BudgetPlanner2Web.Migrations
                     b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
+                    b.HasKey("ExpenseId");
 
                     b.HasIndex("ApplicationUserId");
 
@@ -156,1146 +146,1146 @@ namespace BudgetPlanner2Web.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1337,
+                            ExpenseId = 1337,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "0 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 259, DateTimeKind.Local).AddTicks(480)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 993, DateTimeKind.Local).AddTicks(2587)
                         },
                         new
                         {
-                            Id = 1338,
+                            ExpenseId = 1338,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "1 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(2251)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(1032)
                         },
                         new
                         {
-                            Id = 1339,
+                            ExpenseId = 1339,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "2 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(2496)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(1317)
                         },
                         new
                         {
-                            Id = 1340,
+                            ExpenseId = 1340,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "3 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(2550)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(1376)
                         },
                         new
                         {
-                            Id = 1341,
+                            ExpenseId = 1341,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "4 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(2592)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(1424)
                         },
                         new
                         {
-                            Id = 1342,
+                            ExpenseId = 1342,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "5 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(2644)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(1484)
                         },
                         new
                         {
-                            Id = 1343,
+                            ExpenseId = 1343,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "6 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(2685)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(1533)
                         },
                         new
                         {
-                            Id = 1344,
+                            ExpenseId = 1344,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "7 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(2746)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(1580)
                         },
                         new
                         {
-                            Id = 1345,
+                            ExpenseId = 1345,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "8 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(2789)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(1623)
                         },
                         new
                         {
-                            Id = 1346,
+                            ExpenseId = 1346,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "9 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(2832)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(1672)
                         },
                         new
                         {
-                            Id = 1347,
+                            ExpenseId = 1347,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "10 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(2871)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(1722)
                         },
                         new
                         {
-                            Id = 1348,
+                            ExpenseId = 1348,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "11 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(2911)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(1765)
                         },
                         new
                         {
-                            Id = 1349,
+                            ExpenseId = 1349,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "12 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(2949)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(1809)
                         },
                         new
                         {
-                            Id = 1350,
+                            ExpenseId = 1350,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "13 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(2986)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(1924)
                         },
                         new
                         {
-                            Id = 1351,
+                            ExpenseId = 1351,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "14 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3024)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(1986)
                         },
                         new
                         {
-                            Id = 1352,
+                            ExpenseId = 1352,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "15 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3061)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(2035)
                         },
                         new
                         {
-                            Id = 1353,
+                            ExpenseId = 1353,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "16 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3099)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(2077)
                         },
                         new
                         {
-                            Id = 1354,
+                            ExpenseId = 1354,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "17 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3140)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(2124)
                         },
                         new
                         {
-                            Id = 1355,
+                            ExpenseId = 1355,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "18 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3178)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(2172)
                         },
                         new
                         {
-                            Id = 1356,
+                            ExpenseId = 1356,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "19 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3217)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(2212)
                         },
                         new
                         {
-                            Id = 1357,
+                            ExpenseId = 1357,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "20 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3264)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(2253)
                         },
                         new
                         {
-                            Id = 1358,
+                            ExpenseId = 1358,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "21 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3306)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(2292)
                         },
                         new
                         {
-                            Id = 1359,
+                            ExpenseId = 1359,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "22 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3344)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(2332)
                         },
                         new
                         {
-                            Id = 1360,
+                            ExpenseId = 1360,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "23 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3382)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(2372)
                         },
                         new
                         {
-                            Id = 1361,
+                            ExpenseId = 1361,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "24 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3420)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(2412)
                         },
                         new
                         {
-                            Id = 1362,
+                            ExpenseId = 1362,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "25 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3457)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(2451)
                         },
                         new
                         {
-                            Id = 1363,
+                            ExpenseId = 1363,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "26 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3495)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(2492)
                         },
                         new
                         {
-                            Id = 1364,
+                            ExpenseId = 1364,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "27 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3532)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(2534)
                         },
                         new
                         {
-                            Id = 1365,
+                            ExpenseId = 1365,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "28 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3569)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(2625)
                         },
                         new
                         {
-                            Id = 1366,
+                            ExpenseId = 1366,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "29 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3606)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(2677)
                         },
                         new
                         {
-                            Id = 1367,
+                            ExpenseId = 1367,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "30 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3643)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(2718)
                         },
                         new
                         {
-                            Id = 1368,
+                            ExpenseId = 1368,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "31 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3680)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(2758)
                         },
                         new
                         {
-                            Id = 1369,
+                            ExpenseId = 1369,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "32 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3717)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(2797)
                         },
                         new
                         {
-                            Id = 1370,
+                            ExpenseId = 1370,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "33 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3757)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(2840)
                         },
                         new
                         {
-                            Id = 1371,
+                            ExpenseId = 1371,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "34 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3805)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(2878)
                         },
                         new
                         {
-                            Id = 1372,
+                            ExpenseId = 1372,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "35 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3845)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(2917)
                         },
                         new
                         {
-                            Id = 1373,
+                            ExpenseId = 1373,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "36 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3883)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(2955)
                         },
                         new
                         {
-                            Id = 1374,
+                            ExpenseId = 1374,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "37 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3921)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(2992)
                         },
                         new
                         {
-                            Id = 1375,
+                            ExpenseId = 1375,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "38 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3960)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(3029)
                         },
                         new
                         {
-                            Id = 1376,
+                            ExpenseId = 1376,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "39 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4035)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(3066)
                         },
                         new
                         {
-                            Id = 1377,
+                            ExpenseId = 1377,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "40 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4080)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(3104)
                         },
                         new
                         {
-                            Id = 1378,
+                            ExpenseId = 1378,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "41 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4119)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(3141)
                         },
                         new
                         {
-                            Id = 1379,
+                            ExpenseId = 1379,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "42 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4158)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(3224)
                         },
                         new
                         {
-                            Id = 1380,
+                            ExpenseId = 1380,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "43 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4197)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(3274)
                         },
                         new
                         {
-                            Id = 1381,
+                            ExpenseId = 1381,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "44 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4235)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(3314)
                         },
                         new
                         {
-                            Id = 1382,
+                            ExpenseId = 1382,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "45 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4273)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(3352)
                         },
                         new
                         {
-                            Id = 1383,
+                            ExpenseId = 1383,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "46 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4311)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(3389)
                         },
                         new
                         {
-                            Id = 1384,
+                            ExpenseId = 1384,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "47 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4348)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(3426)
                         },
                         new
                         {
-                            Id = 1385,
+                            ExpenseId = 1385,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "48 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4396)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(3463)
                         },
                         new
                         {
-                            Id = 1386,
+                            ExpenseId = 1386,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "49 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4437)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(3500)
                         },
                         new
                         {
-                            Id = 1387,
+                            ExpenseId = 1387,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "50 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4475)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(3537)
                         },
                         new
                         {
-                            Id = 1388,
+                            ExpenseId = 1388,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "51 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4513)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(3574)
                         },
                         new
                         {
-                            Id = 1389,
+                            ExpenseId = 1389,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "52 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4550)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(3611)
                         },
                         new
                         {
-                            Id = 1390,
+                            ExpenseId = 1390,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "53 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4588)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(3648)
                         },
                         new
                         {
-                            Id = 1391,
+                            ExpenseId = 1391,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "54 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4625)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(3686)
                         },
                         new
                         {
-                            Id = 1392,
+                            ExpenseId = 1392,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "55 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4663)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(3723)
                         },
                         new
                         {
-                            Id = 1393,
+                            ExpenseId = 1393,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "56 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4701)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(3760)
                         },
                         new
                         {
-                            Id = 1394,
+                            ExpenseId = 1394,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "57 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4738)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(3797)
                         },
                         new
                         {
-                            Id = 1395,
+                            ExpenseId = 1395,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "58 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4776)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(3986)
                         },
                         new
                         {
-                            Id = 1396,
+                            ExpenseId = 1396,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "59 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4813)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(4030)
                         },
                         new
                         {
-                            Id = 1397,
+                            ExpenseId = 1397,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "60 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4851)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(4069)
                         },
                         new
                         {
-                            Id = 1398,
+                            ExpenseId = 1398,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "61 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4888)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(4108)
                         },
                         new
                         {
-                            Id = 1399,
+                            ExpenseId = 1399,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "62 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4935)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(4146)
                         },
                         new
                         {
-                            Id = 1400,
+                            ExpenseId = 1400,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "63 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4977)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(4184)
                         },
                         new
                         {
-                            Id = 1401,
+                            ExpenseId = 1401,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "64 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5017)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(4222)
                         },
                         new
                         {
-                            Id = 1402,
+                            ExpenseId = 1402,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "65 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5059)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(4265)
                         },
                         new
                         {
-                            Id = 1403,
+                            ExpenseId = 1403,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "66 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5097)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(4304)
                         },
                         new
                         {
-                            Id = 1404,
+                            ExpenseId = 1404,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "67 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5135)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(4341)
                         },
                         new
                         {
-                            Id = 1405,
+                            ExpenseId = 1405,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "68 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5173)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(4379)
                         },
                         new
                         {
-                            Id = 1406,
+                            ExpenseId = 1406,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "69 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5211)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(4417)
                         },
                         new
                         {
-                            Id = 1407,
+                            ExpenseId = 1407,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "70 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5248)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(4455)
                         },
                         new
                         {
-                            Id = 1408,
+                            ExpenseId = 1408,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "71 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5285)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(4551)
                         },
                         new
                         {
-                            Id = 1409,
+                            ExpenseId = 1409,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "72 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5322)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(4593)
                         },
                         new
                         {
-                            Id = 1410,
+                            ExpenseId = 1410,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "73 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5359)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(4632)
                         },
                         new
                         {
-                            Id = 1411,
+                            ExpenseId = 1411,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "74 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5404)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(4670)
                         },
                         new
                         {
-                            Id = 1412,
+                            ExpenseId = 1412,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "75 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5443)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(4708)
                         },
                         new
                         {
-                            Id = 1413,
+                            ExpenseId = 1413,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "76 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5481)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(4746)
                         },
                         new
                         {
-                            Id = 1414,
+                            ExpenseId = 1414,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "77 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5518)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(4783)
                         },
                         new
                         {
-                            Id = 1415,
+                            ExpenseId = 1415,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "78 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5556)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(4821)
                         },
                         new
                         {
-                            Id = 1416,
+                            ExpenseId = 1416,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "79 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5595)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(4858)
                         },
                         new
                         {
-                            Id = 1417,
+                            ExpenseId = 1417,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "80 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5633)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(4896)
                         },
                         new
                         {
-                            Id = 1418,
+                            ExpenseId = 1418,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "81 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5670)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(4934)
                         },
                         new
                         {
-                            Id = 1419,
+                            ExpenseId = 1419,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "82 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5708)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(4971)
                         },
                         new
                         {
-                            Id = 1420,
+                            ExpenseId = 1420,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "83 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5745)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(5008)
                         },
                         new
                         {
-                            Id = 1421,
+                            ExpenseId = 1421,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "84 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5783)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(5045)
                         },
                         new
                         {
-                            Id = 1422,
+                            ExpenseId = 1422,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "85 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5820)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(5083)
                         },
                         new
                         {
-                            Id = 1423,
+                            ExpenseId = 1423,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "86 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5858)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(5172)
                         },
                         new
                         {
-                            Id = 1424,
+                            ExpenseId = 1424,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "87 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5895)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(5220)
                         },
                         new
                         {
-                            Id = 1425,
+                            ExpenseId = 1425,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "88 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5932)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(5260)
                         },
                         new
                         {
-                            Id = 1426,
+                            ExpenseId = 1426,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "89 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5985)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(5298)
                         },
                         new
                         {
-                            Id = 1427,
+                            ExpenseId = 1427,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "90 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6024)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(5337)
                         },
                         new
                         {
-                            Id = 1428,
+                            ExpenseId = 1428,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "91 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6061)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(5374)
                         },
                         new
                         {
-                            Id = 1429,
+                            ExpenseId = 1429,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "92 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6098)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(5412)
                         },
                         new
                         {
-                            Id = 1430,
+                            ExpenseId = 1430,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "93 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6136)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(5449)
                         },
                         new
                         {
-                            Id = 1431,
+                            ExpenseId = 1431,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "94 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6172)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(5487)
                         },
                         new
                         {
-                            Id = 1432,
+                            ExpenseId = 1432,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "95 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6209)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(5524)
                         },
                         new
                         {
-                            Id = 1433,
+                            ExpenseId = 1433,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "96 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6246)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(5561)
                         },
                         new
                         {
-                            Id = 1434,
+                            ExpenseId = 1434,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "97 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6284)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(5598)
                         },
                         new
                         {
-                            Id = 1435,
+                            ExpenseId = 1435,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "98 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6322)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(5635)
                         },
                         new
                         {
-                            Id = 1436,
+                            ExpenseId = 1436,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "99 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6359)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(5672)
                         },
                         new
                         {
-                            Id = 1437,
+                            ExpenseId = 1437,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "100 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6396)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(5709)
                         },
                         new
                         {
-                            Id = 1438,
+                            ExpenseId = 1438,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "101 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6434)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(5894)
                         },
                         new
                         {
-                            Id = 1439,
+                            ExpenseId = 1439,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "102 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6471)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(5962)
                         },
                         new
                         {
-                            Id = 1440,
+                            ExpenseId = 1440,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "103 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6517)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(6003)
                         },
                         new
                         {
-                            Id = 1441,
+                            ExpenseId = 1441,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "104 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6557)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(6041)
                         },
                         new
                         {
-                            Id = 1442,
+                            ExpenseId = 1442,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "105 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6594)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(6079)
                         },
                         new
                         {
-                            Id = 1443,
+                            ExpenseId = 1443,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "106 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6632)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(6117)
                         },
                         new
                         {
-                            Id = 1444,
+                            ExpenseId = 1444,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "107 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6670)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(6155)
                         },
                         new
                         {
-                            Id = 1445,
+                            ExpenseId = 1445,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "108 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6707)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(6192)
                         },
                         new
                         {
-                            Id = 1446,
+                            ExpenseId = 1446,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "109 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6745)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(6230)
                         },
                         new
                         {
-                            Id = 1447,
+                            ExpenseId = 1447,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "110 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6782)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(6268)
                         },
                         new
                         {
-                            Id = 1448,
+                            ExpenseId = 1448,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "111 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6818)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(6306)
                         },
                         new
                         {
-                            Id = 1449,
+                            ExpenseId = 1449,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "112 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6855)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(6344)
                         },
                         new
                         {
-                            Id = 1450,
+                            ExpenseId = 1450,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "113 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6892)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(6382)
                         },
                         new
                         {
-                            Id = 1451,
+                            ExpenseId = 1451,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "114 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6929)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(6420)
                         },
                         new
                         {
-                            Id = 1452,
+                            ExpenseId = 1452,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "115 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6966)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(6458)
                         },
                         new
                         {
-                            Id = 1453,
+                            ExpenseId = 1453,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "116 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(7003)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(6495)
                         },
                         new
                         {
-                            Id = 1454,
+                            ExpenseId = 1454,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "117 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(7184)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(6594)
                         },
                         new
                         {
-                            Id = 1455,
+                            ExpenseId = 1455,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "118 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(7242)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(6636)
                         },
                         new
                         {
-                            Id = 1456,
+                            ExpenseId = 1456,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "119 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(7283)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(6674)
                         },
                         new
                         {
-                            Id = 1457,
+                            ExpenseId = 1457,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "120 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(7322)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(6712)
                         },
                         new
                         {
-                            Id = 1458,
+                            ExpenseId = 1458,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "121 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(7361)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(6750)
                         },
                         new
                         {
-                            Id = 1459,
+                            ExpenseId = 1459,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "122 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(7401)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(6788)
                         },
                         new
                         {
-                            Id = 1460,
+                            ExpenseId = 1460,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "123 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(7440)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(6826)
                         },
                         new
                         {
-                            Id = 1461,
+                            ExpenseId = 1461,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "124 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(7479)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(6864)
                         },
                         new
                         {
-                            Id = 1462,
+                            ExpenseId = 1462,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "125 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(7518)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(6902)
                         },
                         new
                         {
-                            Id = 1463,
+                            ExpenseId = 1463,
                             Amount = 13.37m,
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "126 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(7557)
+                            Date = new DateTime(2021, 3, 16, 16, 53, 50, 999, DateTimeKind.Local).AddTicks(6939)
                         });
                 });
 

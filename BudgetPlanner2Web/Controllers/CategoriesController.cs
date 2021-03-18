@@ -10,45 +10,28 @@ using BudgetPlanner2Web.Models;
 using BudgetPlanner2Web.Services;
 using BudgetPlanner2Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using BudgetPlanner2Web.GenericRepository;
 
 namespace BudgetPlanner2Web
 {
     [Authorize]
     public class CategoriesController : Controller
     {
-        private readonly AppDbContext _context;
-        private readonly ICategoryRepository _categoryRepository;
         private readonly CategorySummaryGenerator _summaryGenerator;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public CategoriesController(AppDbContext context, ICategoryRepository catRepo, CategorySummaryGenerator generator)
+        public CategoriesController(CategorySummaryGenerator generator, ICategoryRepository catRepo)
         {
-            _context = context;
-            _categoryRepository = catRepo;
             _summaryGenerator = generator;
+            _categoryRepository = catRepo;
         }
 
         // GET: Categories
-        public IActionResult Index(string sortBy)
+        public async Task<IActionResult> Index(string sortBy, int? page)
         {
-            ViewBag.NameOrder = "namedesc";
-            ViewBag.BudgetOrder = "budgetdesc";
-            switch (sortBy)
-            {
-                case "namedesc":
-                    ViewBag.NameOrder = "name";
-                    return View(_summaryGenerator.AllSummaries.OrderByDescending(x => x.Category.Name));
-                case "name":
-                    ViewBag.NameOrder = "namedesc";
-                    return View(_summaryGenerator.AllSummaries.OrderBy(x => x.Category.Name));
-                case "budgetdesc":
-                    ViewBag.BudgetOrder = "budget";
-                    return View(_summaryGenerator.AllSummaries.OrderByDescending(x => x.ThisMonthSpentAmount));
-                case "budget":
-                    ViewBag.BudgetOrder = "budgetdesc";
-                    return View(_summaryGenerator.AllSummaries.OrderBy(x => x.ThisMonthSpentAmount));
-                default:
-                    return View(_summaryGenerator.AllSummaries);
-            }
+            var rez = await _categoryRepository.GetAll(sortBy, page);
+
+            return View(rez);
         }
 
         // GET: Categories/Details/5
@@ -59,7 +42,7 @@ namespace BudgetPlanner2Web
                 return NotFound();
             }
 
-            var category = await _categoryRepository.GetCategoryById(id.Value);
+            var category = await _categoryRepository.GetById(id.Value);
 
             if (category == null)
             {
@@ -80,11 +63,12 @@ namespace BudgetPlanner2Web
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CategoryId,Name,Description,Budget")] Category category)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Budget")] Category category)
         {
             if (ModelState.IsValid)
             {
-                await _categoryRepository.AddCategory(category);
+                _categoryRepository.Add(category);
+                await _categoryRepository.Save();
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
@@ -98,8 +82,7 @@ namespace BudgetPlanner2Web
                 return NotFound();
             }
 
-            //var category = await _context.Categories.FindAsync(id);
-            var category = await _categoryRepository.GetCategoryById(id.Value);
+            var category = await _categoryRepository.GetById(id.Value);
 
             if (category == null)
             {
@@ -113,16 +96,17 @@ namespace BudgetPlanner2Web
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CategoryId,Name,Description,Budget")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Budget")] Category category)
         {
-            if (id != category.CategoryId)
+            if (id != category.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                await _categoryRepository.UpdateCategory(category);
+                await _categoryRepository.Update(category);
+                await _categoryRepository.Save();
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
@@ -136,7 +120,7 @@ namespace BudgetPlanner2Web
                 return NotFound();
             }
 
-            var category = await _categoryRepository.GetCategoryById(id.Value);
+            var category = await _categoryRepository.GetById(id.Value);
 
             if (category == null)
             {
@@ -151,7 +135,8 @@ namespace BudgetPlanner2Web
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _categoryRepository.DeleteCategory(id);
+            await _categoryRepository.Delete(id);
+            await _categoryRepository.Save();
             return RedirectToAction(nameof(Index));
         }
     }

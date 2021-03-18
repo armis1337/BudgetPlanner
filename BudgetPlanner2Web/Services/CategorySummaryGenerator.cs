@@ -1,4 +1,5 @@
-﻿using BudgetPlanner2Web.Models;
+﻿using BudgetPlanner2Web.GenericRepository;
+using BudgetPlanner2Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,62 +9,62 @@ namespace BudgetPlanner2Web.Services
 {
     public class CategorySummaryGenerator
     {
+        //private readonly ICategoryRepository _categoryRepository;
+        private readonly IGenericRepository<Category> _cat;
         private readonly IExpenseRepository _expenseRepository;
-        private readonly ICategoryRepository _categoryRepository;
-        public CategorySummaryGenerator(IExpenseRepository expRepo, ICategoryRepository catRepo)
+
+        public CategorySummaryGenerator(/*ICategoryRepository catRepo, */IExpenseRepository expRepo, IGenericRepository<Category> cat)
         {
+            //_categoryRepository = catRepo;
             _expenseRepository = expRepo;
-            _categoryRepository = catRepo;
+            _cat = cat;
         }
 
-        public IEnumerable<CategorySummary> AllSummaries
+        public async Task<IEnumerable<CategorySummary>> AllSummaries()
         {
-            get
+            // get all categories & expenses
+            var myCategories = await _cat.GetAll();
+            var myExpenses = await _expenseRepository.GetAll();
+
+            // generate summaries
+            List<CategorySummary> summaries = new List<CategorySummary>();
+
+            foreach (var category in myCategories)
             {
-                // get all categories & expenses
-                var myCategories = _categoryRepository.AllCategories;
-                var myExpenses = _expenseRepository.AllExpenses;
-                // generate summaries
-                List<CategorySummary> summaries = new List<CategorySummary>();
-                foreach (var category in myCategories)
+                var thisMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                var summary = new CategorySummary
                 {
-                    var thisMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-                    var summary = new CategorySummary
-                    {
-                        Category = category,
-                        TotalSpentAmount = myExpenses
-                            .Where(x => x.CategoryId == category.CategoryId)
-                            .Select(x => x.Amount)
-                            .Sum(),
-                        TotalBoughtCount = myExpenses
-                            .Where(x => x.CategoryId == category.CategoryId)
-                            .ToList()
-                            .Count,
-                        ThisMonthSpentAmount = myExpenses
-                            .Where(x => x.CategoryId == category.CategoryId)
-                            .Where(x => x.Date >= thisMonth)
-                            .Select(x => x.Amount)
-                            .Sum(),
-                        ThisMonthBoughtCount = myExpenses
-                            .Where(x => x.CategoryId == category.CategoryId)
-                            .Where(x => x.Date >= thisMonth)
-                            .ToList()
-                            .Count
-                    };
-                    summaries.Add(summary);
-                }
-                return summaries;
+                    Category = category,
+                    TotalSpentAmount = myExpenses
+                        .Where(x => x.CategoryId == category.Id)
+                        .Select(x => x.Amount)
+                        .Sum(),
+                    TotalBoughtCount = myExpenses
+                        .Where(x => x.CategoryId == category.Id)
+                        .ToList()
+                        .Count,
+                    ThisMonthSpentAmount = myExpenses
+                        .Where(x => x.CategoryId == category.Id)
+                        .Where(x => x.Date >= thisMonth)
+                        .Select(x => x.Amount)
+                        .Sum(),
+                    ThisMonthBoughtCount = myExpenses
+                        .Where(x => x.CategoryId == category.Id)
+                        .Where(x => x.Date >= thisMonth)
+                        .ToList()
+                        .Count
+                };
+                summaries.Add(summary);
             }
+            return summaries;
         }
 
         public async Task<CategorySummary> GetSummaryByCategoryId(int id)
         {
-            var category = await _categoryRepository.GetCategoryById(id);
+            var category = await _cat.GetById(id);
             if (category != null)
             {
-                var expenses = _expenseRepository.AllExpenses
-                    .Where(x => x.CategoryId == category.CategoryId)
-                    .ToList();
+                var expenses = await _expenseRepository.GetByCategoryId(id);
 
                 var thisMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
                 CategorySummary summary = new CategorySummary

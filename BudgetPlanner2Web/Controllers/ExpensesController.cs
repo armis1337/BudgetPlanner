@@ -10,6 +10,7 @@ using BudgetPlanner2Web.Services;
 using BudgetPlanner2Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using BudgetPlanner2Web.GenericRepository;
 
 namespace BudgetPlanner2Web.Controllers
 {
@@ -19,81 +20,25 @@ namespace BudgetPlanner2Web.Controllers
         private readonly IExpenseRepository _expenseRepository;
         private readonly ICategoryRepository _categoryRepository;
 
-        public ExpensesController(IExpenseRepository expenseRepo, ICategoryRepository catRepo)
+        public ExpensesController(IExpenseRepository expRepo, ICategoryRepository catRepo)
         {
-            _expenseRepository = expenseRepo;
+            _expenseRepository = expRepo;
             _categoryRepository = catRepo;
         }
 
+        // POST: Expenses
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ViewResult> Index(int CategoryId)
+        public ActionResult Index(int CategoryId)
         {
-            return await Index(CategoryId, "");
+            var routeValues = new Dictionary<string, string> { { "id", CategoryId.ToString() } };
+            return RedirectToAction(nameof(Index), routeValues);
         }
 
         // GET: Expenses
-        public async Task<ViewResult> Index(int id, string sortBy)// id - category name
+        public async Task<ViewResult> Index(int id, string sortBy, int? page)
         {
-            var model = new ExpensesListViewModel();
-            var categories = _categoryRepository.AllCategories.ToList();
-            var category = await _categoryRepository.GetCategoryById(id);
-
-            if (category == null)
-            {
-                model.Expenses = _expenseRepository.AllExpenses.ToList();
-                model.CurrentCategory = new Category { CategoryId = 0, Name = "All categories" };
-
-                categories.Insert(0, model.CurrentCategory);
-                model.CategoriesSelectList = new SelectList(categories, "CategoryId", "Name", 0);
-            }
-            else
-            {
-                model.Expenses = _expenseRepository.AllExpenses
-                    .Where(x => x.CategoryId == category.CategoryId)
-                    .ToList();
-
-                model.CurrentCategory = category;
-
-                categories.Insert(0, new Category { CategoryId = 0, Name = "All categories" });
-                model.CategoriesSelectList = new SelectList(categories, "CategoryId", "Name", model.CurrentCategory.CategoryId);
-            }
-
-            ViewBag.CategoryOrder = "categorydesc";
-            ViewBag.AmountOrder = "amountdesc";
-            ViewBag.DateOrder = "date";
-
-            switch (sortBy)
-            {
-                case "categorydesc":
-                    model.Expenses = model.Expenses.OrderByDescending(x => x.Category.Name).ToList();
-                    ViewBag.CategoryOrder = "category";
-                    break;
-                case "category":
-                    model.Expenses = model.Expenses.OrderBy(x => x.Category.Name).ToList();
-                    ViewBag.CategoryOrder = "categorydesc";
-                    break;
-                case "amountdesc":
-                    model.Expenses = model.Expenses.OrderByDescending(x => x.Amount).ToList();
-                    ViewBag.AmountOrder = "amount";
-                    break;
-                case "amount":
-                    model.Expenses = model.Expenses.OrderBy(x => x.Amount).ToList();
-                    ViewBag.AmountOrder = "amountdesc";
-                    break;
-                case "datedesc":
-                    model.Expenses = model.Expenses.OrderByDescending(x => x.Date).ToList();
-                    ViewBag.DateOrder = "date";
-                    break;
-                case "date":
-                    model.Expenses = model.Expenses.OrderBy(x => x.Date).ToList();
-                    ViewBag.DateOrder = "datedesc";
-                    break;
-                default:
-                    break;
-            }
-
-            return View(model);
+            return View(await _expenseRepository.GetAll(id, sortBy, page));
         }
 
         // GET: Expenses/Details/5
@@ -104,8 +49,7 @@ namespace BudgetPlanner2Web.Controllers
                 return NotFound();
             }
 
-            var expense = await _expenseRepository.GetExpenseById(id.Value);
-
+            var expense = await _expenseRepository.GetById(id.Value);
             if (expense == null)
             {
                 return NotFound();
@@ -115,21 +59,21 @@ namespace BudgetPlanner2Web.Controllers
         }
 
         // GET: Expenses/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var categories = _categoryRepository.AllCategories;
+            var categories = await _categoryRepository.GetAll();
             if (!categories.Any())
             {
                 categories = new List<Category> { 
                     new Category
                     {
-                        CategoryId = -1,
+                        Id = -1,
                         Name = "-"
                     } 
                 };
             }
 
-            ViewData["CategoryId"] = new SelectList(categories, "CategoryId", "Name");
+            ViewData["CategoryId"] = new SelectList(categories, "Id", "Name");
             return View();
         }
 
@@ -138,14 +82,14 @@ namespace BudgetPlanner2Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ExpenseId,Amount,Date,Comment,CategoryId")] Expense expense)
+        public async Task<IActionResult> Create([Bind("Id,Amount,Date,Comment,CategoryId")] Expense expense)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && _expenseRepository.Add(expense))
             {
-                await _expenseRepository.AddExpense(expense);
+                await _expenseRepository.Save();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_categoryRepository.AllCategories, "CategoryId", "Name", expense.CategoryId);
+            ViewData["CategoryId"] = new SelectList(await _categoryRepository.GetAll(), "Id", "Name", expense.CategoryId);
             return View(expense);
         }
 
@@ -157,13 +101,13 @@ namespace BudgetPlanner2Web.Controllers
                 return NotFound();
             }
 
-            var expense = await _expenseRepository.GetExpenseById(id.Value);
+            var expense = await _expenseRepository.GetById(id.Value);
 
             if (expense == null)
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_categoryRepository.AllCategories, "CategoryId", "Name", expense.CategoryId);
+            ViewData["CategoryId"] = new SelectList(await _categoryRepository.GetAll(), "Id", "Name", expense.CategoryId);
             return View(expense);
         }
 
@@ -172,19 +116,19 @@ namespace BudgetPlanner2Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ExpenseId,Amount,Date,Comment,CategoryId")] Expense expense)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Amount,Date,Comment,CategoryId")] Expense expense)
         {
-            if (id != expense.ExpenseId)
+            if (id != expense.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && await _expenseRepository.Update(expense))
             {
-                await _expenseRepository.UpdateExpense(expense);
+                await _expenseRepository.Save();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_categoryRepository.AllCategories, "CategoryId", "Name", expense.CategoryId);
+            ViewData["CategoryId"] = new SelectList(await _categoryRepository.GetAll(), "Id", "Name", expense.CategoryId);
             return View(expense);
         }
 
@@ -196,7 +140,7 @@ namespace BudgetPlanner2Web.Controllers
                 return NotFound();
             }
 
-            var expense = await _expenseRepository.GetExpenseById(id.Value);
+            var expense = await _expenseRepository.GetById(id.Value);
 
             if (expense == null)
             {
@@ -211,7 +155,8 @@ namespace BudgetPlanner2Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _expenseRepository.DeleteExpense(id);
+            await _expenseRepository.Delete(id);
+            await _expenseRepository.Save();
             return RedirectToAction(nameof(Index));
         }
     }

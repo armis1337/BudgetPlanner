@@ -13,6 +13,7 @@ using BudgetPlanner2Web.Data;
 using BudgetPlanner2Web.Services;
 using Microsoft.AspNetCore.Identity;
 using BudgetPlanner2Web.Models;
+using BudgetPlanner2Web.GenericRepository;
 
 namespace BudgetPlanner2Web
 {
@@ -37,11 +38,12 @@ namespace BudgetPlanner2Web
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<AppDbContext>();
 
+            services.AddScoped<CategorySummaryGenerator>();
+
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IExpenseRepository, ExpenseRepository>();
-            services.AddScoped<CategorySummaryGenerator>();
-            services.AddScoped<GoogleDriveService>();
-
+            services.AddScoped<IGenericRepository<Category>, GenericRepository<Category>>(); // summary generatoriui
+            
             services.AddHttpContextAccessor();
 
             services.AddRazorPages();

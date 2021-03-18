@@ -7,14 +7,13 @@ using System.Text.Json.Serialization;
 
 namespace BudgetPlanner2Web.Models
 {
-    public class Expense
+    public class Expense : BaseEntity
     {
-        [Display(Name = "Number")]
-        public int ExpenseId { get; set; }
+        //[Display(Name = "Number")]
+        public override int Id { get => base.Id; set => base.Id = value; }
 
         [DataType(DataType.Currency)]
         public decimal Amount { get; set; }
-
         public DateTime Date { get; set; }
         public string Comment { get; set; }
 
@@ -27,17 +26,12 @@ namespace BudgetPlanner2Web.Models
         [JsonIgnore]
         public ApplicationUser ApplicationUser { get; set; } // owner
 
-        public void Update(Expense expense)
-        {
-            Amount = expense.Amount;
-            Date = expense.Date;
-            Comment = expense.Comment;
-            CategoryId = expense.CategoryId;
-        }
-
-        public override string ToString()
-        {
-            return "test string XD";
-        }
+        //public void Update(Expense expense)
+        //{
+        //    Amount = expense.Amount;
+        //    Date = expense.Date;
+        //    Comment = expense.Comment;
+        //    CategoryId = expense.CategoryId;
+        //}
     }
 }

@@ -1,4 +1,5 @@
-﻿using BudgetPlanner2Web.Models;
+﻿using BudgetPlanner2Web.GenericRepository;
+using BudgetPlanner2Web.Models;
 using BudgetPlanner2Web.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -14,40 +15,24 @@ namespace BudgetPlanner2Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly IExpenseRepository _expenseRepository;
-        private readonly ICategoryRepository _categoryRepository;
         private readonly CategorySummaryGenerator _summaryGenerator;
-        //private readonly GoogleDriveService _driveService;
 
-        public HomeController(ILogger<HomeController> logger, SignInManager<ApplicationUser> signin, IExpenseRepository expRepo, ICategoryRepository catRepo,
-            CategorySummaryGenerator generator/*, GoogleDriveService service*/)
+        public HomeController(SignInManager<ApplicationUser> signin, CategorySummaryGenerator generator)
         {
-            _logger = logger;
             _signInManager = signin;
-            _expenseRepository = expRepo;
-            _categoryRepository = catRepo;
             _summaryGenerator = generator;
-            //_driveService = service;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            if (_signInManager.IsSignedIn(User))
-            {
-                return View(nameof(LoggedInIndex), _summaryGenerator.AllSummaries);
-            }
-            else
+            //if (_signInManager.IsSignedIn(User))
+            //{
+            //    return View(nameof(LoggedInIndex), await _summaryGenerator.AllSummaries()); // padaryt ne all o top 3
+            //}
+            //else
                 return View();
         }
-
-        //public IActionResult Test()
-        //{
-        //    _driveService.UploadFileOnDrive();
-        //    ViewBag.Message = "hello";
-        //    return View();
-        //}
 
         public IActionResult LoggedInIndex()
         {

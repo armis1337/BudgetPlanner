@@ -4,14 +4,16 @@ using BudgetPlanner2Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BudgetPlanner2Web.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210316214058_GeneralizeModels")]
+    partial class GeneralizeModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,18 +99,12 @@ namespace BudgetPlanner2Web.Migrations
                     b.Property<decimal?>("Budget")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -136,13 +132,7 @@ namespace BudgetPlanner2Web.Migrations
                     b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -161,7 +151,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "0 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 259, DateTimeKind.Local).AddTicks(480)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 68, DateTimeKind.Local).AddTicks(1981)
                         },
                         new
                         {
@@ -170,7 +160,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "1 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(2251)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(1083)
                         },
                         new
                         {
@@ -179,7 +169,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "2 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(2496)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(1553)
                         },
                         new
                         {
@@ -188,7 +178,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "3 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(2550)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(1653)
                         },
                         new
                         {
@@ -197,7 +187,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "4 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(2592)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(1736)
                         },
                         new
                         {
@@ -206,7 +196,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "5 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(2644)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(1839)
                         },
                         new
                         {
@@ -215,7 +205,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "6 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(2685)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(1912)
                         },
                         new
                         {
@@ -224,7 +214,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "7 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(2746)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(1980)
                         },
                         new
                         {
@@ -233,7 +223,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "8 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(2789)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(2051)
                         },
                         new
                         {
@@ -242,7 +232,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "9 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(2832)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(2126)
                         },
                         new
                         {
@@ -251,7 +241,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "10 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(2871)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(2195)
                         },
                         new
                         {
@@ -260,7 +250,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "11 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(2911)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(2263)
                         },
                         new
                         {
@@ -269,7 +259,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "12 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(2949)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(2333)
                         },
                         new
                         {
@@ -278,7 +268,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "13 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(2986)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(2400)
                         },
                         new
                         {
@@ -287,7 +277,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "14 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3024)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(2469)
                         },
                         new
                         {
@@ -296,7 +286,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "15 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3061)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(2537)
                         },
                         new
                         {
@@ -305,7 +295,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "16 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3099)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(2694)
                         },
                         new
                         {
@@ -314,7 +304,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "17 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3140)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(2783)
                         },
                         new
                         {
@@ -323,7 +313,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "18 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3178)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(2853)
                         },
                         new
                         {
@@ -332,7 +322,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "19 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3217)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(2921)
                         },
                         new
                         {
@@ -341,7 +331,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "20 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3264)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(2990)
                         },
                         new
                         {
@@ -350,7 +340,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "21 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3306)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(3059)
                         },
                         new
                         {
@@ -359,7 +349,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "22 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3344)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(3127)
                         },
                         new
                         {
@@ -368,7 +358,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "23 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3382)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(3196)
                         },
                         new
                         {
@@ -377,7 +367,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "24 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3420)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(3269)
                         },
                         new
                         {
@@ -386,7 +376,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "25 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3457)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(3337)
                         },
                         new
                         {
@@ -395,7 +385,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "26 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3495)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(3404)
                         },
                         new
                         {
@@ -404,7 +394,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "27 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3532)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(3474)
                         },
                         new
                         {
@@ -413,7 +403,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "28 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3569)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(3543)
                         },
                         new
                         {
@@ -422,7 +412,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "29 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3606)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(3612)
                         },
                         new
                         {
@@ -431,7 +421,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "30 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3643)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(3681)
                         },
                         new
                         {
@@ -440,7 +430,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "31 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3680)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(3941)
                         },
                         new
                         {
@@ -449,7 +439,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "32 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3717)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(4061)
                         },
                         new
                         {
@@ -458,7 +448,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "33 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3757)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(4147)
                         },
                         new
                         {
@@ -467,7 +457,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "34 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3805)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(4226)
                         },
                         new
                         {
@@ -476,7 +466,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "35 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3845)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(4337)
                         },
                         new
                         {
@@ -485,7 +475,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "36 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3883)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(4436)
                         },
                         new
                         {
@@ -494,7 +484,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "37 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3921)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(4517)
                         },
                         new
                         {
@@ -503,7 +493,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "38 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(3960)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(4596)
                         },
                         new
                         {
@@ -512,7 +502,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "39 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4035)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(4671)
                         },
                         new
                         {
@@ -521,7 +511,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "40 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4080)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(4742)
                         },
                         new
                         {
@@ -530,7 +520,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "41 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4119)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(4812)
                         },
                         new
                         {
@@ -539,7 +529,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "42 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4158)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(4886)
                         },
                         new
                         {
@@ -548,7 +538,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "43 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4197)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(4961)
                         },
                         new
                         {
@@ -557,7 +547,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "44 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4235)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(5035)
                         },
                         new
                         {
@@ -566,7 +556,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "45 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4273)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(5191)
                         },
                         new
                         {
@@ -575,7 +565,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "46 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4311)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(5274)
                         },
                         new
                         {
@@ -584,7 +574,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "47 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4348)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(5345)
                         },
                         new
                         {
@@ -593,7 +583,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "48 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4396)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(5420)
                         },
                         new
                         {
@@ -602,7 +592,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "49 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4437)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(5492)
                         },
                         new
                         {
@@ -611,7 +601,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "50 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4475)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(5562)
                         },
                         new
                         {
@@ -620,7 +610,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "51 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4513)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(5637)
                         },
                         new
                         {
@@ -629,7 +619,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "52 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4550)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(5708)
                         },
                         new
                         {
@@ -638,7 +628,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "53 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4588)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(5786)
                         },
                         new
                         {
@@ -647,7 +637,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "54 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4625)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(5857)
                         },
                         new
                         {
@@ -656,7 +646,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "55 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4663)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(5928)
                         },
                         new
                         {
@@ -665,7 +655,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "56 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4701)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(6005)
                         },
                         new
                         {
@@ -674,7 +664,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "57 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4738)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(6079)
                         },
                         new
                         {
@@ -683,7 +673,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "58 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4776)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(6151)
                         },
                         new
                         {
@@ -692,7 +682,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "59 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4813)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(6221)
                         },
                         new
                         {
@@ -701,7 +691,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "60 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4851)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(6293)
                         },
                         new
                         {
@@ -710,7 +700,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "61 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4888)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(6450)
                         },
                         new
                         {
@@ -719,7 +709,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "62 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4935)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(6531)
                         },
                         new
                         {
@@ -728,7 +718,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "63 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(4977)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(6610)
                         },
                         new
                         {
@@ -737,7 +727,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "64 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5017)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(6683)
                         },
                         new
                         {
@@ -746,7 +736,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "65 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5059)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(6767)
                         },
                         new
                         {
@@ -755,7 +745,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "66 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5097)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(6840)
                         },
                         new
                         {
@@ -764,7 +754,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "67 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5135)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(6918)
                         },
                         new
                         {
@@ -773,7 +763,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "68 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5173)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(6997)
                         },
                         new
                         {
@@ -782,7 +772,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "69 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5211)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(7069)
                         },
                         new
                         {
@@ -791,7 +781,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "70 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5248)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(7134)
                         },
                         new
                         {
@@ -800,7 +790,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "71 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5285)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(7199)
                         },
                         new
                         {
@@ -809,7 +799,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "72 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5322)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(7266)
                         },
                         new
                         {
@@ -818,7 +808,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "73 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5359)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(7342)
                         },
                         new
                         {
@@ -827,7 +817,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "74 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5404)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(7563)
                         },
                         new
                         {
@@ -836,7 +826,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "75 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5443)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(7664)
                         },
                         new
                         {
@@ -845,7 +835,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "76 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5481)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(7741)
                         },
                         new
                         {
@@ -854,7 +844,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "77 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5518)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(7814)
                         },
                         new
                         {
@@ -863,7 +853,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "78 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5556)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(7887)
                         },
                         new
                         {
@@ -872,7 +862,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "79 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5595)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(7956)
                         },
                         new
                         {
@@ -881,7 +871,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "80 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5633)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(8028)
                         },
                         new
                         {
@@ -890,7 +880,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "81 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5670)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(8109)
                         },
                         new
                         {
@@ -899,7 +889,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "82 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5708)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(8197)
                         },
                         new
                         {
@@ -908,7 +898,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "83 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5745)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(8288)
                         },
                         new
                         {
@@ -917,7 +907,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "84 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5783)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(8380)
                         },
                         new
                         {
@@ -926,7 +916,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "85 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5820)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(8463)
                         },
                         new
                         {
@@ -935,7 +925,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "86 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5858)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(8533)
                         },
                         new
                         {
@@ -944,7 +934,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "87 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5895)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(8600)
                         },
                         new
                         {
@@ -953,7 +943,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "88 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5932)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(8672)
                         },
                         new
                         {
@@ -962,7 +952,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "89 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(5985)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(8854)
                         },
                         new
                         {
@@ -971,7 +961,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "90 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6024)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(8979)
                         },
                         new
                         {
@@ -980,7 +970,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "91 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6061)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(9081)
                         },
                         new
                         {
@@ -989,7 +979,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "92 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6098)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(9156)
                         },
                         new
                         {
@@ -998,7 +988,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "93 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6136)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(9236)
                         },
                         new
                         {
@@ -1007,7 +997,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "94 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6172)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(9313)
                         },
                         new
                         {
@@ -1016,7 +1006,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "95 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6209)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(9388)
                         },
                         new
                         {
@@ -1025,7 +1015,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "96 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6246)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(9468)
                         },
                         new
                         {
@@ -1034,7 +1024,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "97 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6284)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(9555)
                         },
                         new
                         {
@@ -1043,7 +1033,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "98 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6322)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(9636)
                         },
                         new
                         {
@@ -1052,7 +1042,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "99 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6359)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(9714)
                         },
                         new
                         {
@@ -1061,7 +1051,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "100 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6396)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(9799)
                         },
                         new
                         {
@@ -1070,7 +1060,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "101 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6434)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 78, DateTimeKind.Local).AddTicks(9907)
                         },
                         new
                         {
@@ -1079,7 +1069,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "102 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6471)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 79, DateTimeKind.Local).AddTicks(25)
                         },
                         new
                         {
@@ -1088,7 +1078,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "103 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6517)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 79, DateTimeKind.Local).AddTicks(108)
                         },
                         new
                         {
@@ -1097,7 +1087,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "104 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6557)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 79, DateTimeKind.Local).AddTicks(292)
                         },
                         new
                         {
@@ -1106,7 +1096,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "105 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6594)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 79, DateTimeKind.Local).AddTicks(441)
                         },
                         new
                         {
@@ -1115,7 +1105,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "106 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6632)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 79, DateTimeKind.Local).AddTicks(540)
                         },
                         new
                         {
@@ -1124,7 +1114,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "107 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6670)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 79, DateTimeKind.Local).AddTicks(617)
                         },
                         new
                         {
@@ -1133,7 +1123,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "108 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6707)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 79, DateTimeKind.Local).AddTicks(705)
                         },
                         new
                         {
@@ -1142,7 +1132,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "109 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6745)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 79, DateTimeKind.Local).AddTicks(791)
                         },
                         new
                         {
@@ -1151,7 +1141,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "110 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6782)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 79, DateTimeKind.Local).AddTicks(873)
                         },
                         new
                         {
@@ -1160,7 +1150,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "111 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6818)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 79, DateTimeKind.Local).AddTicks(958)
                         },
                         new
                         {
@@ -1169,7 +1159,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "112 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6855)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 79, DateTimeKind.Local).AddTicks(1080)
                         },
                         new
                         {
@@ -1178,7 +1168,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "113 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6892)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 79, DateTimeKind.Local).AddTicks(1190)
                         },
                         new
                         {
@@ -1187,7 +1177,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "114 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6929)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 79, DateTimeKind.Local).AddTicks(1279)
                         },
                         new
                         {
@@ -1196,7 +1186,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "115 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(6966)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 79, DateTimeKind.Local).AddTicks(1369)
                         },
                         new
                         {
@@ -1205,7 +1195,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "116 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(7003)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 79, DateTimeKind.Local).AddTicks(1460)
                         },
                         new
                         {
@@ -1214,7 +1204,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "117 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(7184)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 79, DateTimeKind.Local).AddTicks(1540)
                         },
                         new
                         {
@@ -1223,7 +1213,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "118 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(7242)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 79, DateTimeKind.Local).AddTicks(1623)
                         },
                         new
                         {
@@ -1232,7 +1222,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "119 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(7283)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 79, DateTimeKind.Local).AddTicks(1742)
                         },
                         new
                         {
@@ -1241,7 +1231,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "120 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(7322)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 79, DateTimeKind.Local).AddTicks(1964)
                         },
                         new
                         {
@@ -1250,7 +1240,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "121 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(7361)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 79, DateTimeKind.Local).AddTicks(2051)
                         },
                         new
                         {
@@ -1259,7 +1249,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "122 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(7401)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 79, DateTimeKind.Local).AddTicks(2122)
                         },
                         new
                         {
@@ -1268,7 +1258,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "123 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(7440)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 79, DateTimeKind.Local).AddTicks(2192)
                         },
                         new
                         {
@@ -1277,7 +1267,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "124 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(7479)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 79, DateTimeKind.Local).AddTicks(2270)
                         },
                         new
                         {
@@ -1286,7 +1276,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "125 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(7518)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 79, DateTimeKind.Local).AddTicks(2364)
                         },
                         new
                         {
@@ -1295,7 +1285,7 @@ namespace BudgetPlanner2Web.Migrations
                             ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
                             CategoryId = 16,
                             Comment = "126 automatically added expense",
-                            Date = new DateTime(2021, 3, 18, 3, 15, 0, 265, DateTimeKind.Local).AddTicks(7557)
+                            Date = new DateTime(2021, 3, 16, 23, 40, 57, 79, DateTimeKind.Local).AddTicks(2507)
                         });
                 });
 

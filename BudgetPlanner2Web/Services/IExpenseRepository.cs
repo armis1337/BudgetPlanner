@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BudgetPlanner2Web.GenericRepository;
 using BudgetPlanner2Web.Models;
+using BudgetPlanner2Web.ViewModels;
 
 namespace BudgetPlanner2Web.Services
 {
-    public interface IExpenseRepository
+    public interface IExpenseRepository : IGenericRepository<Expense>
     {
-        IEnumerable<Expense> AllExpenses { get; }
-        Task<Expense> AddExpense(Expense expense);
-        Task<Expense> UpdateExpense(Expense expense);
-        Task DeleteExpense(int id);
-        Task<Expense> GetExpenseById(int id);
+        Task<IEnumerable<Expense>> GetByCategoryId(int id);
+        Task<ExpensesListViewModel> GetAll(int? catId, string sortBy, int? page);
     }
 }

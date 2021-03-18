@@ -1,4 +1,6 @@
-﻿using BudgetPlanner2Web.Models;
+﻿using BudgetPlanner2Web.GenericRepository;
+using BudgetPlanner2Web.Models;
+using BudgetPlanner2Web.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,13 +8,8 @@ using System.Threading.Tasks;
 
 namespace BudgetPlanner2Web.Services
 {
-    public interface ICategoryRepository
+    public interface ICategoryRepository : IGenericRepository<Category>
     {
-        public IEnumerable<Category> AllCategories { get; }
-        public Task<bool> AddDefaultCategory(ApplicationUser user);
-        public Task<Category> GetCategoryById(int id);
-        public Task<Category> AddCategory(Category category);
-        public Task<Category> UpdateCategory(Category category);
-        public Task DeleteCategory(int id);
+        Task<BaseListViewModel<CategorySummary>> GetAll(string sortBy, int? page);
     }
 }

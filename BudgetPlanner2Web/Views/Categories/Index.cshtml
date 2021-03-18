@@ -1,4 +1,5 @@
-﻿@model IEnumerable<CategorySummary> 
+﻿@*@model IEnumerable<CategorySummary>*@
+@model BaseListViewModel<CategorySummary>
 
 @{
     ViewData["Title"] = "My categories";
@@ -14,45 +15,64 @@
     <thead>
         <tr>
             <th>
-                <a asp-action="Index" asp-route-sortBy="@ViewBag.NameOrder">@Html.DisplayNameFor(model => model.Category.Name)</a>
+                <a asp-action="Index" asp-route-sortBy="@Model.SortOrder["name"]">@Html.DisplayNameFor(model => model.Items.First().Category.Name)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Category.Description)
+                @Html.DisplayNameFor(model => model.Items.First().Category.Description)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortBy="@ViewBag.BudgetOrder">@Html.DisplayNameFor(model => model.Category.Budget)</a>
-                @*@Html.DisplayNameFor(model => model.Category.Budget)*@
+                <a asp-action="Index" asp-route-sortBy="@Model.SortOrder["budget"]">@Html.DisplayNameFor(model => model.Items.First().Category.Budget)</a>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Description)
-            </td>
-            <td>
-                @if (item.Warning)
-                {
-                    <div class="text-danger">
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Description)
+                </td>
+                <td>
+                    @if (item.Warning)
+                    {
+                        <div class="text-danger">
+                            @Html.DisplayFor(modelItem => item.BudgetStatus)
+                        </div>
+                    }
+                    else
+                    {
                         @Html.DisplayFor(modelItem => item.BudgetStatus)
-                    </div>
-                }
-                else
-                {
-                    @Html.DisplayFor(modelItem => item.BudgetStatus)
-                }
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Category.CategoryId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Category.CategoryId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Category.CategoryId">Delete</a>
-            </td>
-        </tr>
-}
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Category.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Category.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Category.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.Items.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Items.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortBy="@Model.CurrentSort"
+   asp-route-page="@(Model.Items.PageIndex - 1)"
+   class="btn btn-dark @prevDisabled">
+    Previous
+</a>
+
+<a asp-action="Index"
+   asp-route-sortBy="@Model.CurrentSort"
+   asp-route-page="@(Model.Items.PageIndex + 1)"
+   class="btn btn-dark @nextDisabled">
+    Next
+</a>

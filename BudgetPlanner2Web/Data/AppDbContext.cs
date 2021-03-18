@@ -11,7 +11,7 @@ namespace BudgetPlanner2Web.Data
 {
     public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
-        public AppDbContext (DbContextOptions<AppDbContext> options)
+        public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
         }
@@ -19,21 +19,26 @@ namespace BudgetPlanner2Web.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Expense> Expenses { get; set; }
 
-        /*protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            // seed some expenses
+            for (int i = 0; i < 127; i++)
+            {
+                modelBuilder.Entity<Expense>().HasData(
+                    new Expense
+                    {
+                        Id = 1337 + i,
+                        Amount = 13.37m,
+                        CategoryId = 16,
+                        //ApplicationUser = manager.FindByIdAsync("9659f3cc-8531-4b6b-bba3-382c108b192c").Result,
+                        ApplicationUserId = "9659f3cc-8531-4b6b-bba3-382c108b192c",
+                        Date = DateTime.Now,
+                        Comment = i + " automatically added expense"
+                    });
+            }
 
-            //seed categories
-            //modelBuilder.Entity<Category>().HasData(new Category { CategoryId = 1, Name = "Default", Description = "Default category", isDefault = true, ApplicationUser = null });
-            //modelBuilder.Entity<Category>().HasData(new Category { CategoryId = 1, Name = "Shopping", Description = "money spent on shopping" });
-            //modelBuilder.Entity<Category>().HasData(new Category { CategoryId = 2, Name = "Fun", Description = "money spent on fun things ;)" });
-            //modelBuilder.Entity<Category>().HasData(new Category { CategoryId = 3, Name = "Other", Description = "money spent on other stuff" });
 
-            //seed expenses
-            //modelBuilder.Entity<Expense>().HasData(new Expense { ExpenseId = 1, Amount = 3.80m, CategoryId = 1, Comment = "kebabas su cesnakiniu", Date = DateTime.Now });
-            //modelBuilder.Entity<Expense>().HasData(new Expense { ExpenseId = 2, Amount = 4.10m, CategoryId = 1, Comment = "camel blue", Date = DateTime.Now });
-            //modelBuilder.Entity<Expense>().HasData(new Expense { ExpenseId = 3, Amount = 20m, CategoryId = 2, Comment = "420", Date = DateTime.Now });
-            //modelBuilder.Entity<Expense>().HasData(new Expense { ExpenseId = 4, Amount = 50m, CategoryId = 3, Comment = "spark bauda", Date = DateTime.Now });
-        }*/
+        }
     }
 }
