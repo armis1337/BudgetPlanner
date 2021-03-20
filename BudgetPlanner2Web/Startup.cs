@@ -14,6 +14,9 @@ using BudgetPlanner2Web.Services;
 using Microsoft.AspNetCore.Identity;
 using BudgetPlanner2Web.Models;
 using BudgetPlanner2Web.GenericRepository;
+using BudgetPlanner2Web.Configuration;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BudgetPlanner2Web
 {
@@ -68,7 +71,25 @@ namespace BudgetPlanner2Web
                     options.AuthorizationEndpoint = "https://login.microsoftonline.com/consumers/oauth2/v2.0/authorize";
                     options.TokenEndpoint = "https://login.microsoftonline.com/consumers/oauth2/v2.0/token";
                     options.AccessDeniedPath = @"/Identity/Account/Accessdenied";
-                });
+                })
+                .AddJwtBearer(jwt => {
+                    var key = Encoding.ASCII.GetBytes(Configuration["JwtConfig:Secret"]);
+
+                    jwt.SaveToken = true;
+                    jwt.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true, // this will validate the 3rd part of the jwt token using the secret that we added in the appsettings and verify we have generated the jwt token
+                        IssuerSigningKey = new SymmetricSecurityKey(key), // Add the secret key to our Jwt encryption
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        RequireExpirationTime = false,
+                        ValidateLifetime = true
+                    };
+                }); 
+
+            services.Configure<JwtConfig>(Configuration.GetSection("JwtConfig"));
+
+            //services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -87,6 +108,13 @@ namespace BudgetPlanner2Web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            //app.UseSwagger();
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            //    //c.RoutePrefix = "/swagger";
+            //});
+
             app.UseRouting();
 
             app.UseAuthentication();
@@ -97,6 +125,7 @@ namespace BudgetPlanner2Web
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                
                 endpoints.MapRazorPages();
             });
         }

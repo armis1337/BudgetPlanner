@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using BudgetPlanner2Web.Models;
 using BudgetPlanner2Web.Services;
-using BudgetPlanner2Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using BudgetPlanner2Web.GenericRepository;
 
 namespace BudgetPlanner2Web.Controllers
 {

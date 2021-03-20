@@ -20,6 +20,9 @@ namespace BudgetPlanner2Web.Models
         {
             foreach(var prop in entity.GetType().GetProperties())
             {
+                if (prop.Name == "CreatedAt" || prop.Name == "UpdatedAt" || prop.Name == "ApplicationUserId")
+                    continue;
+
                 var value = prop.GetValue(entity);
                 if (value != null)
                     GetType().GetProperty(prop.Name).SetValue(this, prop.GetValue(entity));

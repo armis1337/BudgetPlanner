@@ -1,6 +1,6 @@
 using System;
 
-namespace BudgetPlanner2Web.Models
+namespace BudgetPlanner2Web.ViewModels
 {
     public class ErrorViewModel
     {

@@ -1,8 +1,6 @@
 ﻿using BudgetPlanner2Web.Data;
 using BudgetPlanner2Web.Models;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -73,15 +71,17 @@ namespace BudgetPlanner2Web.GenericRepository
             return false;
         }
 
-        public async Task Delete(int id)
+        public async Task<bool> Delete(int id)
         {
             T tmp = await GetById(id);
 
-            if (tmp.ApplicationUserId == GetCurrentUserId())
+            if (tmp != null && tmp.ApplicationUserId == GetCurrentUserId())
             {
                 T existing = await table.FindAsync(id);
                 table.Remove(existing);
+                return true;
             }
+            return false;
         }
 
         public async Task Save()

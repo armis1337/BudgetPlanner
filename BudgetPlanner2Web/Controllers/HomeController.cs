@@ -1,15 +1,10 @@
-﻿using BudgetPlanner2Web.GenericRepository;
-using BudgetPlanner2Web.Models;
+﻿using BudgetPlanner2Web.Models;
 using BudgetPlanner2Web.Services;
+using BudgetPlanner2Web.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BudgetPlanner2Web.Controllers
 {
@@ -24,7 +19,7 @@ namespace BudgetPlanner2Web.Controllers
             _summaryGenerator = generator;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             //if (_signInManager.IsSignedIn(User))
             //{

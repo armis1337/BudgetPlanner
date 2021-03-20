@@ -12,7 +12,7 @@ namespace BudgetPlanner2Web.GenericRepository
         Task<T> GetById(int id);
         bool Add(T obj);
         Task<bool> Update(T obj);
-        Task Delete(int id);
+        Task<bool> Delete(int id);
         Task Save();
         string GetCurrentUserId();
     }
