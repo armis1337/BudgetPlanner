@@ -1,6 +1,7 @@
 ﻿using BudgetPlanner2Web.Data;
 using BudgetPlanner2Web.GenericRepository;
 using BudgetPlanner2Web.Models;
+using BudgetPlanner2Web.Models.DTO;
 using BudgetPlanner2Web.ViewModels;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -13,15 +14,14 @@ namespace BudgetPlanner2Web.Services
     public class CategoryRepository : GenericRepository<Category>, ICategoryRepository
     {
         private readonly CategorySummaryGenerator _summaryGenerator;
-        public CategoryRepository(AppDbContext context, IHttpContextAccessor http, 
-            CategorySummaryGenerator catGen) : base(context, http)
+        public CategoryRepository(AppDbContext context, IHttpContextAccessor http, CategorySummaryGenerator catGen) : base(context, http)
         {
             _summaryGenerator = catGen;
         }
 
-        public async Task<BaseListViewModel<CategorySummary>> GetAll(string sortBy, int? page)
+        public async Task<BaseListViewModel<CategorySummary>> GetAllAsync(string sortBy, int? page)
         {
-            IEnumerable<CategorySummary> list = await _summaryGenerator.AllSummaries();
+            IEnumerable<CategorySummary> list = await _summaryGenerator.AllSummariesAsync();
             var viewModel = new BaseListViewModel<CategorySummary>();
 
             viewModel.SortOrder = new Dictionary<string, string>() {

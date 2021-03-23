@@ -10,7 +10,7 @@ namespace BudgetPlanner2Web.Services
 {
     public interface IExpenseRepository : IGenericRepository<Expense>
     {
-        Task<IEnumerable<Expense>> GetByCategoryId(int id);
-        Task<ExpensesListViewModel> GetAll(int? catId, string sortBy, int? page);
+        Task<IEnumerable<Expense>> GetByCategoryIdAsync(int id);
+        Task<ExpensesListViewModel> GetAllAsync(int? catId, int? page, string sortBy="");
     }
 }

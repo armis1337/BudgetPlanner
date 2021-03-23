@@ -11,6 +11,6 @@ namespace BudgetPlanner2Web.Models
         public string ApplicationUserId { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
-        public void Update(IEntity entity);
+        public void Update(object obj);
     }
 }

@@ -26,14 +26,14 @@ namespace BudgetPlanner2Web.GenericRepository
             table = _context.Set<T>();
         }
 
-        public async Task<IEnumerable<T>> GetAll()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await table
                 .Where(x => x.ApplicationUserId == GetCurrentUserId())
                 .ToListAsync();
         }
         
-        public async Task<T> GetById(int id)
+        public async Task<T> GetByIdAsync(int id)
         {
             var result = table.Where(x => x.Id == id);
 
@@ -49,17 +49,22 @@ namespace BudgetPlanner2Web.GenericRepository
                 .FirstOrDefaultAsync();
         }
 
-        public virtual bool Add(T obj)
+        public virtual async Task<T> AddAsync(T obj, string userID = null)
         {
-            obj.ApplicationUserId = GetCurrentUserId();
+            if (userID != null)
+                obj.ApplicationUserId = userID;
+            else
+                obj.ApplicationUserId = GetCurrentUserId();
+
             obj.CreatedAt = DateTime.Now;
-            table.Add(obj);
-            return true;
+            obj.UpdatedAt = null; 
+            await table.AddAsync(obj);
+            return obj;
         }
 
-        public virtual async Task<bool> Update(T obj)
+        public virtual async Task<bool> UpdateAsync(T obj)
         {
-            T tmp = await GetById(obj.Id);
+            T tmp = await GetByIdAsync(obj.Id);
             if (tmp.ApplicationUserId == GetCurrentUserId())
             {
                 tmp.Update(obj);
@@ -71,9 +76,9 @@ namespace BudgetPlanner2Web.GenericRepository
             return false;
         }
 
-        public async Task<bool> Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            T tmp = await GetById(id);
+            T tmp = await GetByIdAsync(id);
 
             if (tmp != null && tmp.ApplicationUserId == GetCurrentUserId())
             {
@@ -84,9 +89,14 @@ namespace BudgetPlanner2Web.GenericRepository
             return false;
         }
 
-        public async Task Save()
+        public async Task SaveAsync()
         {
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> ObjectExistsAsync(int id)
+        {
+            return await table.AnyAsync(x => x.Id == id);
         }
 
         public string GetCurrentUserId()

@@ -9,22 +9,20 @@ namespace BudgetPlanner2Web.Services
 {
     public class CategorySummaryGenerator
     {
-        //private readonly ICategoryRepository _categoryRepository;
-        private readonly IGenericRepository<Category> _cat;
+        private readonly IGenericRepository<Category> _categoryRepository;
         private readonly IExpenseRepository _expenseRepository;
 
-        public CategorySummaryGenerator(/*ICategoryRepository catRepo, */IExpenseRepository expRepo, IGenericRepository<Category> cat)
+        public CategorySummaryGenerator(IExpenseRepository expRepo, IGenericRepository<Category> catRepo)
         {
-            //_categoryRepository = catRepo;
             _expenseRepository = expRepo;
-            _cat = cat;
+            _categoryRepository = catRepo;
         }
 
-        public async Task<IEnumerable<CategorySummary>> AllSummaries()
+        public async Task<IEnumerable<CategorySummary>> AllSummariesAsync()
         {
             // get all categories & expenses
-            var myCategories = await _cat.GetAll();
-            var myExpenses = await _expenseRepository.GetAll();
+            var myCategories = await _categoryRepository.GetAllAsync();
+            var myExpenses = await _expenseRepository.GetAllAsync();
 
             // generate summaries
             List<CategorySummary> summaries = new List<CategorySummary>();
@@ -59,12 +57,12 @@ namespace BudgetPlanner2Web.Services
             return summaries;
         }
 
-        public async Task<CategorySummary> GetSummaryByCategoryId(int id)
+        public async Task<CategorySummary> GetSummaryByCategoryIdAsync(int id)
         {
-            var category = await _cat.GetById(id);
+            var category = await _categoryRepository.GetByIdAsync(id);
             if (category != null)
             {
-                var expenses = await _expenseRepository.GetByCategoryId(id);
+                var expenses = await _expenseRepository.GetByCategoryIdAsync(id);
 
                 var thisMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
                 CategorySummary summary = new CategorySummary

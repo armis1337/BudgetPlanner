@@ -10,9 +10,6 @@ namespace BudgetPlanner2Web.ViewModels
 {
     public class ExpensesListViewModel : BaseListViewModel<Expense>
     {
-        //public PaginatedList<Expense> Expenses { get; set; }
-        //public Dictionary<string, string> SortOrder { get; set; }
-        //public string CurrentSort { get; set; }
         public SelectList CategoriesSelectList { get; set; }
 
         [Display(Name = "Category")]

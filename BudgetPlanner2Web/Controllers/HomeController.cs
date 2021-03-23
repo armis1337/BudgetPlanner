@@ -10,26 +10,7 @@ namespace BudgetPlanner2Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly CategorySummaryGenerator _summaryGenerator;
-
-        public HomeController(SignInManager<ApplicationUser> signin, CategorySummaryGenerator generator)
-        {
-            _signInManager = signin;
-            _summaryGenerator = generator;
-        }
-
         public IActionResult Index()
-        {
-            //if (_signInManager.IsSignedIn(User))
-            //{
-            //    return View(nameof(LoggedInIndex), await _summaryGenerator.AllSummaries()); // padaryt ne all o top 3
-            //}
-            //else
-                return View();
-        }
-
-        public IActionResult LoggedInIndex()
         {
             return View();
         }

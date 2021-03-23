@@ -2,7 +2,7 @@
 
 namespace BudgetPlanner2Web.Models.DTO.Requests
 {
-    public class UserLoginRequest
+    public class UserAuthRequest
     {
         [Required]
         public string Email { get; set; }

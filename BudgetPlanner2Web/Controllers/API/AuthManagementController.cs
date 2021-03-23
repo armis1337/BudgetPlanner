@@ -13,31 +13,47 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
+using BudgetPlanner2Web.GenericRepository;
+using Microsoft.AspNetCore.Http;
 
 namespace BudgetPlanner2Web.Controllers.API
 {
+    [Produces("application/json")]
     [Route("api/[controller]")] // api/authmanagement
     [ApiController]
     public class AuthManagementController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly JwtConfig _jwtConfig;
+        private readonly IGenericRepository<Category> _categoryRepository;
 
-        public AuthManagementController(UserManager<ApplicationUser> usrmgr, IOptionsMonitor<JwtConfig> options)
+        public AuthManagementController(UserManager<ApplicationUser> usrmgr, IOptionsMonitor<JwtConfig> options, IGenericRepository<Category> catrepo)
         {
             _userManager = usrmgr;
             _jwtConfig = options.CurrentValue;
+            _categoryRepository = catrepo;
         }
 
-        [HttpGet]
-        public string Index()
-        {
-            return "hello world!!!!";
-        }
-
+        /// <summary>
+        /// Registers user
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     POST: /api/AuthManagement/Register
+        ///     {
+        ///         "email": "user@email.com",
+        ///         "password": "Password123!@#"
+        ///     }
+        ///     
+        /// </remarks>
+        /// <response code="200">If user has been registered successfully </response>
+        /// <response code="400">Bad request</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
         [Route("Register")]
-        public async Task<IActionResult> Register([FromBody] UserRegistrationRequestDto user)
+        public async Task<IActionResult> Register([FromBody] UserAuthRequest user)
         {
             if (ModelState.IsValid)
             {
@@ -45,7 +61,7 @@ namespace BudgetPlanner2Web.Controllers.API
 
                 if (existingUser != null)
                 {
-                    return BadRequest(new RegistrationResponse()
+                    return BadRequest(new AuthResult()
                     {
                         Result = false,
                         Errors = new List<string>()
@@ -57,24 +73,28 @@ namespace BudgetPlanner2Web.Controllers.API
 
                 var newUser = new ApplicationUser()
                 {
+                    UserName = user.Email,
                     Email = user.Email,
-                    UserName = user.Email
                 };
 
                 var isCreated = await _userManager.CreateAsync(newUser, user.Password);
-            
+
                 if (isCreated.Succeeded)
                 {
                     var token = GenerateJwtToken(newUser);
 
-                    return Ok(new RegistrationResponse()
+                    var id = _userManager.GetUserId(User);
+                    await _categoryRepository.AddAsync(new Category { Name = "Default", Description = "Default category" }, newUser.Id);
+                    await _categoryRepository.SaveAsync();
+
+                    return Ok(new AuthResult()
                     {
                         Result = true,
                         Token = token
                     });
                 }
 
-                return new JsonResult(new RegistrationResponse()
+                return new JsonResult(new AuthResult()
                 {
                     Result = false,
                     Errors = isCreated.Errors.Select(x => x.Description).ToList()
@@ -82,7 +102,7 @@ namespace BudgetPlanner2Web.Controllers.API
                 { StatusCode = 500 };
             }
 
-            return BadRequest(new RegistrationResponse()
+            return BadRequest(new AuthResult()
             {
                 Result = false,
                 Errors = new List<string>()
@@ -92,9 +112,26 @@ namespace BudgetPlanner2Web.Controllers.API
             });
         }
 
+        /// <summary>
+        /// Logs user in
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     POST: /api/AuthManagement/Login
+        ///     {
+        ///         "email": "user@email.com",
+        ///         "password": "Password123!"
+        ///     }
+        ///     
+        /// </remarks>
+        /// <response code="200">If user has been logged in successfully </response>
+        /// <response code="400">Bad request</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
         [Route("Login")]
-        public async Task<IActionResult> Login([FromBody] UserLoginRequest user)
+        public async Task<IActionResult> Login([FromBody] UserAuthRequest user)
         {
             if (ModelState.IsValid)
             {
@@ -157,15 +194,11 @@ namespace BudgetPlanner2Web.Controllers.API
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    //new Claim("Id", user.Id),
                     new Claim(JwtRegisteredClaimNames.NameId, user.Id),
-                    new Claim(JwtRegisteredClaimNames.Sub, user.Email),
                     new Claim(JwtRegisteredClaimNames.Email, user.Email),
-
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 }),
 
-                Expires = DateTime.UtcNow.AddHours(6),
+                Expires = DateTime.UtcNow.AddYears(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512Signature)
             };
 

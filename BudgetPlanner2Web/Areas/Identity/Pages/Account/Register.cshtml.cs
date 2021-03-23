@@ -88,7 +88,8 @@ namespace BudgetPlanner2Web.Areas.Identity.Pages.Account
 
                     // kai vartojas uzsiregistruoja, sukuriam jam Default kategorija
                     //await _categoryRepository.AddDefaultCategory(user);
-                    _categoryRepository.Add(new Category { Name = "Default", Description = "Default category" });
+                    await _categoryRepository.AddAsync(new Category { Name = "Default", Description = "Default category" }, user.Id);
+                    await _categoryRepository.SaveAsync();
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

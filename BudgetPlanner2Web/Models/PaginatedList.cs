@@ -35,7 +35,7 @@ namespace BudgetPlanner2Web.Models
             }
         }
 
-        public static async Task<PaginatedList<T>> Create(IQueryable<T> source, int pageIndex, int pageSize=10)
+        public static async Task<PaginatedList<T>> CreateAsync(IQueryable<T> source, int pageIndex, int pageSize = 10)
         {
             var count = await source.CountAsync();
             var items = await source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();

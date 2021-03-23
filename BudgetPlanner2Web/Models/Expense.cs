@@ -18,6 +18,7 @@ namespace BudgetPlanner2Web.Models
         [Required]
         public DateTime Date { get; set; }
         public string Comment { get; set; }
+        [Required]
 
         [Range(1, int.MaxValue, ErrorMessage = "Create a category first.")]
         public int CategoryId { get; set; }

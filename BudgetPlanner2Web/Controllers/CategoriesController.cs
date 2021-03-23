@@ -21,7 +21,7 @@ namespace BudgetPlanner2Web
         // GET: Categories
         public async Task<IActionResult> Index(string sortBy, int? page)
         {
-            var rez = await _categoryRepository.GetAll(sortBy, page);
+            var rez = await _categoryRepository.GetAllAsync(sortBy, page);
 
             return View(rez);
         }
@@ -34,14 +34,14 @@ namespace BudgetPlanner2Web
                 return NotFound();
             }
 
-            var category = await _categoryRepository.GetById(id.Value);
+            var category = await _categoryRepository.GetByIdAsync(id.Value);
 
             if (category == null)
             {
                 return NotFound();
             }
 
-            return View(await _summaryGenerator.GetSummaryByCategoryId(id.Value));
+            return View(await _summaryGenerator.GetSummaryByCategoryIdAsync(id.Value));
         }
 
         // GET: Categories/Create
@@ -51,16 +51,13 @@ namespace BudgetPlanner2Web
         }
 
         // POST: Categories/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Budget")] Category category)
+        public async Task<IActionResult> Create([Bind("Name,Description,Budget")] Category category)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && await _categoryRepository.AddAsync(category) != null)
             {
-                _categoryRepository.Add(category);
-                await _categoryRepository.Save();
+                await _categoryRepository.SaveAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
@@ -74,7 +71,7 @@ namespace BudgetPlanner2Web
                 return NotFound();
             }
 
-            var category = await _categoryRepository.GetById(id.Value);
+            var category = await _categoryRepository.GetByIdAsync(id.Value);
 
             if (category == null)
             {
@@ -84,21 +81,18 @@ namespace BudgetPlanner2Web
         }
 
         // POST: Categories/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Budget")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("Name,Description,Budget")] Category category)
         {
             if (id != category.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && await _categoryRepository.UpdateAsync(category))
             {
-                await _categoryRepository.Update(category);
-                await _categoryRepository.Save();
+                await _categoryRepository.SaveAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
@@ -112,7 +106,7 @@ namespace BudgetPlanner2Web
                 return NotFound();
             }
 
-            var category = await _categoryRepository.GetById(id.Value);
+            var category = await _categoryRepository.GetByIdAsync(id.Value);
 
             if (category == null)
             {
@@ -127,9 +121,12 @@ namespace BudgetPlanner2Web
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _categoryRepository.Delete(id);
-            await _categoryRepository.Save();
-            return RedirectToAction(nameof(Index));
+            if(await _categoryRepository.DeleteAsync(id))
+            {
+                await _categoryRepository.SaveAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Delete), id);
         }
     }
 }

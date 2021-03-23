@@ -21,28 +21,27 @@ namespace BudgetPlanner2Web.Services
             _categoryRepository = catRepo;
         }
 
-        public override async Task<bool> Update(Expense obj)
+        public override async Task<bool> UpdateAsync(Expense obj)
         {
-            var myCategories = await _categoryRepository.GetAll();
-
-            if (myCategories.Any(x => x.Id == obj.CategoryId))
+            //var myCategories = await _categoryRepository.GetAllAsync();
+            //if (myCategories.Any(x => x.Id == obj.CategoryId))
+            if (await _categoryRepository.ObjectExistsAsync(obj.CategoryId))
             {
-                return await base.Update(obj);
+                return await base.UpdateAsync(obj);
             }
             return false;
         }
 
-        public override bool Add(Expense obj)
+        public override async Task<Expense> AddAsync(Expense obj, string userID = null)
         {
-            var myCategories = _categoryRepository.GetAll().Result;
-            if (myCategories.Any(x => x.Id == obj.CategoryId))
+            if(await _categoryRepository.ObjectExistsAsync(obj.CategoryId))
             {
-                return base.Add(obj);
+                return await base.AddAsync(obj, userID);
             }
-            return false;
+            return null;
         }
 
-        public async Task<IEnumerable<Expense>> GetByCategoryId(int id)
+        public async Task<IEnumerable<Expense>> GetByCategoryIdAsync(int id)
         {
             return await table
                 .Where(x => x.ApplicationUserId == GetCurrentUserId())
@@ -50,11 +49,10 @@ namespace BudgetPlanner2Web.Services
                 .ToListAsync();
         }
 
-        public async Task<ExpensesListViewModel> GetAll(int? catId, string sortBy, int? page)
+        public async Task<ExpensesListViewModel> GetAllAsync(int? catId, int? page, string sortBy="")
         {
-
             var viewModel = new ExpensesListViewModel();
-            var categories = await _categoryRepository.GetAll();
+            var categories = await _categoryRepository.GetAllAsync();
             categories = categories.Prepend(new Category { Id = 0, Name = "All categories" });
 
             IQueryable<Expense> list = table
@@ -62,15 +60,13 @@ namespace BudgetPlanner2Web.Services
 
             if (catId != null && catId != 0)
             {
-                //list = await GetByCategoryId(catId.Value); // old
                 list = list
                     .Where(x => x.CategoryId == catId.Value);
 
-                viewModel.CurrentCategory = await _categoryRepository.GetById(catId.Value);
+                viewModel.CurrentCategory = await _categoryRepository.GetByIdAsync(catId.Value);
             }
             else
             {
-                //list = await GetAll(); // old
                 viewModel.CurrentCategory = categories.ElementAt(0);
             }
 
@@ -112,7 +108,7 @@ namespace BudgetPlanner2Web.Services
                     break;
             }
 
-            viewModel.Items = await PaginatedList<Expense>.Create(list, page ?? 1);
+            viewModel.Items = await PaginatedList<Expense>.CreateAsync(list, page ?? 1);
             return viewModel;
         }
     }

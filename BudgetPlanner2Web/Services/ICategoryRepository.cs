@@ -10,6 +10,6 @@ namespace BudgetPlanner2Web.Services
 {
     public interface ICategoryRepository : IGenericRepository<Category>
     {
-        Task<BaseListViewModel<CategorySummary>> GetAll(string sortBy, int? page);
+        Task<BaseListViewModel<CategorySummary>> GetAllAsync(string sortBy, int? page);
     }
 }

@@ -33,7 +33,7 @@ namespace BudgetPlanner2Web.Controllers
         // GET: Expenses
         public async Task<ViewResult> Index(int id, string sortBy, int? page)
         {
-            return View(await _expenseRepository.GetAll(id, sortBy, page));
+            return View(await _expenseRepository.GetAllAsync(id, page, sortBy));
         }
 
         // GET: Expenses/Details/5
@@ -44,7 +44,7 @@ namespace BudgetPlanner2Web.Controllers
                 return NotFound();
             }
 
-            var expense = await _expenseRepository.GetById(id.Value);
+            var expense = await _expenseRepository.GetByIdAsync(id.Value);
             if (expense == null)
             {
                 return NotFound();
@@ -56,7 +56,7 @@ namespace BudgetPlanner2Web.Controllers
         // GET: Expenses/Create
         public async Task<IActionResult> Create()
         {
-            var categories = await _categoryRepository.GetAll();
+            var categories = await _categoryRepository.GetAllAsync();
             if (!categories.Any())
             {
                 categories = new List<Category> { 
@@ -73,18 +73,16 @@ namespace BudgetPlanner2Web.Controllers
         }
 
         // POST: Expenses/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Amount,Date,Comment,CategoryId")] Expense expense)
         {
-            if (ModelState.IsValid && _expenseRepository.Add(expense))
+            if (ModelState.IsValid && await _expenseRepository.AddAsync(expense) != null)
             {
-                await _expenseRepository.Save();
+                await _expenseRepository.SaveAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(await _categoryRepository.GetAll(), "Id", "Name", expense.CategoryId);
+            ViewData["CategoryId"] = new SelectList(await _categoryRepository.GetAllAsync(), "Id", "Name", expense.CategoryId);
             return View(expense);
         }
 
@@ -96,19 +94,17 @@ namespace BudgetPlanner2Web.Controllers
                 return NotFound();
             }
 
-            var expense = await _expenseRepository.GetById(id.Value);
+            var expense = await _expenseRepository.GetByIdAsync(id.Value);
 
             if (expense == null)
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(await _categoryRepository.GetAll(), "Id", "Name", expense.CategoryId);
+            ViewData["CategoryId"] = new SelectList(await _categoryRepository.GetAllAsync(), "Id", "Name", expense.CategoryId);
             return View(expense);
         }
 
         // POST: Expenses/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Amount,Date,Comment,CategoryId")] Expense expense)
@@ -118,12 +114,12 @@ namespace BudgetPlanner2Web.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid && await _expenseRepository.Update(expense))
+            if (ModelState.IsValid && await _expenseRepository.UpdateAsync(expense))
             {
-                await _expenseRepository.Save();
+                await _expenseRepository.SaveAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(await _categoryRepository.GetAll(), "Id", "Name", expense.CategoryId);
+            ViewData["CategoryId"] = new SelectList(await _categoryRepository.GetAllAsync(), "Id", "Name", expense.CategoryId);
             return View(expense);
         }
 
@@ -135,7 +131,7 @@ namespace BudgetPlanner2Web.Controllers
                 return NotFound();
             }
 
-            var expense = await _expenseRepository.GetById(id.Value);
+            var expense = await _expenseRepository.GetByIdAsync(id.Value);
 
             if (expense == null)
             {
@@ -150,9 +146,13 @@ namespace BudgetPlanner2Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _expenseRepository.Delete(id);
-            await _expenseRepository.Save();
-            return RedirectToAction(nameof(Index));
+            if(await _expenseRepository.DeleteAsync(id))
+            {
+                await _expenseRepository.SaveAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Delete), id);
         }
     }
 }
